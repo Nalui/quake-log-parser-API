@@ -1,7 +1,7 @@
 import re
+import json
 from domain.game import Game
 from enumeration.regex import Regex
-import json
 
 def file_reader(file):
     log_file = open(file, "r+")
@@ -14,7 +14,7 @@ def file_reader(file):
         if re.match(Regex.INIT_GAME.value, row):
             if in_game:
                 game.alert_messages.append("The game did not shut down properly.")
-                games.append(json.dumps(game.__dict__, default=list))
+                games.append(game)
             game_number += 1
             game = Game(game_number)
             in_game = True
@@ -37,7 +37,7 @@ def file_reader(file):
                         game.alert_messages.append(f"Player {killed} is not in players set and therefore cannot kill.")
 
             elif re.match(Regex.END_GAME.value, row):
-                games.append(json.dumps(game.__dict__, default=list))
+                games.append(game)
                 in_game = False
 
     return games

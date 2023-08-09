@@ -13,7 +13,7 @@ basePath: /api
 paths:
   /games:
     get:
-      operationId: controller.games.list_all
+      operationId: controller.game_controller.list_all
       tags:
         - Games
       summary: List all games
@@ -25,18 +25,28 @@ paths:
             type: array
             items:
               properties:
-                game:
-                  type: string
-                total_kills:
-                  type: integer
-                players:
-                  type: array
-                kills:
-                  type: object      
+                game_1:
+                  type: object
+                  properties:
+                    total_kills:
+                      type: integer
+                    players:
+                      type: array
+                      items:
+                        type: string
+                    kills:
+                      type: object
+                      properties:
+                        string:
+                          type: integer 
+                    alert_messages:
+                      type: array
+                      items:
+                        type: string    
 
   /game/{game_number}:
     get:
-      operationId: controller.games.get_game
+      operationId: controller.game_controller.get_game
       tags:
         - Games
       summary: Get one game from the game list
@@ -51,15 +61,26 @@ paths:
         200:
           description: Successfully get game 
           schema:
-            properties:
-              game:
-                type: string
-              total_kills:
-                type: integer
-              players:
-                type: array
-              kills:
-                type: object
+              properties:
+                game_1:
+                  type: object
+                  properties:
+                    total_kills:
+                      type: integer
+                    players:
+                      type: array
+                      items:
+                        type: string
+                    kills:
+                      type: object
+                      properties:
+                        string:
+                          type: integer 
+                    alert_messages:
+                      type: array
+                      items:
+                        type: string    
+
         404:
           description: Game number not found
           schema:
