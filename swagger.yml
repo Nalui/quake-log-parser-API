@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  description: Quake 3 arena's game log API
+  version: "1.0.0"
+  title: Swagger quake log API
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /games:
+    get:
+      operationId: controller.games.list_all
+      tags:
+        - Games
+      summary: Read the entire list of games
+      description: Read the entire list of games presented in the log file
+      responses:
+        200:
+          description: Successfully read log file
+          schema:
+            type: array
+            items:
+              properties:
+                game:
+                  type: string
+                total_kills:
+                  type: integer
+                players:
+                  type: array
+                kills:
+                  type: object

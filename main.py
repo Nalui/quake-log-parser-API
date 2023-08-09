@@ -1,3 +1,4 @@
-from service.parser import file_reader
+from server import app
 
-print(file_reader("games.log"))
+if __name__ == "__main__":
+    app.run()
