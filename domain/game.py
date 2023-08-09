@@ -1,9 +1,6 @@
-import numbers
-
-
 class Game (): 
     def __init__(self, number):
-        self.name = f'game_{number}'
+        self.name = f"game_{number}"
         self.total_kills = 0  
         self.players = set() 
         self.kills = {}

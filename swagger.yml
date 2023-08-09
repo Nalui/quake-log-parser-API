@@ -16,11 +16,11 @@ paths:
       operationId: controller.games.list_all
       tags:
         - Games
-      summary: Read the entire list of games
-      description: Read the entire list of games presented in the log file
+      summary: List all games
+      description: List all games presented in the log file
       responses:
         200:
-          description: Successfully read log file
+          description: Successfully list games from log file
           schema:
             type: array
             items:
@@ -32,4 +32,44 @@ paths:
                 players:
                   type: array
                 kills:
-                  type: object
+                  type: object      
+
+  /game/{game_number}:
+    get:
+      operationId: controller.games.get_game
+      tags:
+        - Games
+      summary: Get one game from the game list
+      description: Get one game, in ocuurence order, from the log file
+      parameters:
+        - name: game_number
+          in: query
+          type: integer
+          description: Game number in occurence order
+          required: true
+      responses:
+        200:
+          description: Successfully get game 
+          schema:
+            properties:
+              game:
+                type: string
+              total_kills:
+                type: integer
+              players:
+                type: array
+              kills:
+                type: object
+        404:
+          description: Game number not found
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+              status:
+                type: integer
+              title:
+                type: string
+              type:
+                type: string
