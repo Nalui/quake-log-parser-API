@@ -1,5 +1,6 @@
 from flask import abort
 import json
+from domain.game import Game
 
 def find_game(games, game_number):
     try:
@@ -23,3 +24,11 @@ def create_json (game):
     if game.alert_messages: 
         data["alert_messages"] = game.alert_messages
     return json.dumps({game.name : data})
+
+def create_filled_game(game_number, total_kills, players, kills, alert_messages = []):
+    game = Game(game_number)
+    game.set_total_kills(total_kills)
+    game.set_players(players)
+    game.set_kills(kills)
+    game.set_alert_messages(alert_messages)
+    return game
