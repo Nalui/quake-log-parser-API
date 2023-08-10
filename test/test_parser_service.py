@@ -34,7 +34,7 @@ class Parser_test(unittest.TestCase):
     '''Case 5: game with no ShutdownGame''' 
     def test_case_5(self):
         game_case_5 = create_filled_game(5, 1, {"Mocinha", "Dono da Bola"}, {"Dono da Bola": 1, "Mocinha": 0}, \
-                                  ["Line 105: The game did not shut down properly."])
+                                  ["Line 103: The game did not shut down properly."])
         game_result = RESULT[4]
         self.assertEqual(Game_matcher(game_case_5), game_result)
     

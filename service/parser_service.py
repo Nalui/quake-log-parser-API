@@ -18,10 +18,10 @@ def parser(log_file):
     games = []
     game = Game(0)
 
-    for line, row in enumerate(log_file): 
+    for line, row in enumerate(log_file, start=1):
         if re.match(Regex.INIT_GAME.value, row):
             if in_game:
-                game.alert_messages.append(f"Line {line}: The game did not shut down properly.")
+                game.alert_messages.append(f"Line {line - 2}: The game did not shut down properly.")
                 games.append(game)
             game_number += 1
             game = Game(game_number)
