@@ -27,16 +27,9 @@ def parser(log_file):
                 killer = re.search(Regex.KILLER.value, row).group(1)
                 if re.fullmatch(killer, Regex.WORLD.value):
                     killed = re.search(Regex.KILLED.value, row).group(1)
-                    try:
-                        game.add_world_kill(killed)
-                    except KeyError:
-                        game.alert_messages.append(f"Player {killed} is not in players set and therefore cannot be killed.")
+                    game.add_world_kill(killed)
                 else: 
-                    try:
-                        game.add_player_kill(killer)
-                    except KeyError:
-                        game.alert_messages.append(f"Player {killed} is not in players set and therefore cannot kill.")
-
+                    game.add_player_kill(killer)
             elif re.match(Regex.END_GAME.value, row):
                 games.append(game)
                 in_game = False

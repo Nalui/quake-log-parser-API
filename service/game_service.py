@@ -25,7 +25,7 @@ def create_json (game):
         data["alert_messages"] = game.alert_messages
     return json.dumps({game.name : data})
 
-def create_filled_game(game_number, total_kills, players, kills, alert_messages = []):
+def create_filled_game(game_number, total_kills, players, kills, alert_messages):
     game = Game(game_number)
     game.set_total_kills(total_kills)
     game.set_players(players)
