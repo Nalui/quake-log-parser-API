@@ -1,11 +1,12 @@
 import re
-import json
 from domain.game import Game
 from enumeration.regex import Regex
 
 def file_reader(file):
     log_file = open(file, "r+")
+    return parser(log_file)
 
+def parser(log_file):
     game_number = 0
     in_game = False
     games = []
@@ -21,7 +22,7 @@ def file_reader(file):
         elif in_game:
             if re.match(Regex.NEW_PLAYER.value, row):
                 player = re.split("\\\\", row)
-                game.set_player(player[1]) 
+                game.add_player(player[1]) 
             elif re.match(Regex.NEW_KILL.value, row):
                 killer = re.search(Regex.KILLER.value, row).group(1)
                 if re.fullmatch(killer, Regex.WORLD.value):
