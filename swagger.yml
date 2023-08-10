@@ -11,7 +11,7 @@ produces:
 basePath: /api
 
 paths:
-  /games/{file_name}:
+  /games:
     get:
       operationId: controller.game_controller.list_all
       tags:
@@ -64,7 +64,7 @@ paths:
               type:
                 type: string
 
-  /game/{file_name}/{game_number}:
+  /game:
     get:
       operationId: controller.game_controller.get_game
       tags:
