@@ -1,7 +1,6 @@
 import unittest
 from service.parser_service import file_reader
 from service.game_service import create_filled_game
-from domain.game import Game
 from domain.game_matcher import Game_matcher
 
 RESULT = file_reader("test.log")
