@@ -25,17 +25,17 @@ class Game ():
         self.players.add(player)
         self.kills.setdefault(player, 0)
 
-    def add_player_kill(self, player):
+    def add_player_kill(self, player, line = None):
         try:
             self.kills[player] +=1
             self.total_kills += 1
         except KeyError:
-            self.alert_messages.append(f"Player {player} is not in players set and therefore cannot kill.")
+            self.alert_messages.append(f"Line {line}: Player {player} is not in players set and therefore cannot kill.")
 
     
-    def add_world_kill(self, player):
+    def add_world_kill(self, player, line = None):
         try:
             self.kills[player] -=1
             self.total_kills += 1
         except KeyError:
-            self.alert_messages.append(f"Player {player} is not in players set and therefore cannot be killed.")
+            self.alert_messages.append(f"Line {line}: Player {player} is not in players set and therefore cannot be killed.")

@@ -5,8 +5,8 @@ from enumeration.regex import Regex
 
 def file_reader(file):
     try:
-        log_file = open(file, "r+")
-        return parser(log_file)
+        with open(file) as log_file:
+            return parser(log_file)
     except FileNotFoundError:
         abort(
             404, f"File {file} not found. Try to use 'games.log' or 'test.log'"
@@ -18,10 +18,10 @@ def parser(log_file):
     games = []
     game = Game(0)
 
-    for row in log_file:
+    for line, row in enumerate(log_file): 
         if re.match(Regex.INIT_GAME.value, row):
             if in_game:
-                game.alert_messages.append("The game did not shut down properly.")
+                game.alert_messages.append(f"Line {line}: The game did not shut down properly.")
                 games.append(game)
             game_number += 1
             game = Game(game_number)
@@ -38,13 +38,13 @@ def parser(log_file):
                         killed_re = re.search(Regex.KILLED.value, row)
                         if(killed_re):
                             killed = killed_re.group(1)
-                            game.add_world_kill(killed)
+                            game.add_world_kill(killed, line)
                         else:
-                          game.alert_messages.append("Unable to find killed.")  
+                          game.alert_messages.append(f"Line {line}: Unable to find killed")  
                     else: 
-                        game.add_player_kill(killer)
+                        game.add_player_kill(killer, line)
                 else:
-                    game.alert_messages.append("Unable to find killer.")
+                    game.alert_messages.append(f"Line {line}: Unable to find killer")
             elif re.match(Regex.END_GAME.value, row):
                 games.append(game)
                 in_game = False

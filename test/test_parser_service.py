@@ -30,21 +30,33 @@ class Parser_test(unittest.TestCase):
 
     def test_case_5(self): 
         game_case_5 = create_filled_game(5, 1, {"Mocinha", "Dono da Bola"}, {"Dono da Bola": 1, "Mocinha": 0}, \
-                                  ["The game did not shut down properly."])
+                                  ["Line 105: The game did not shut down properly."])
         game_result = RESULT[4]
         self.assertEqual(Game_matcher(game_case_5), game_result)
 
     def test_case_6(self): 
         game_case_6 = create_filled_game(6, 2, {"Mocinha", "Dono da Bola"}, {"Dono da Bola": 1, "Mocinha": -1}, \
-                                  ["Player Zeh is not in players set and therefore cannot be killed."])
+                                  ["Line 114: Player Zeh is not in players set and therefore cannot be killed."])
         game_result = RESULT[5]
         self.assertEqual(Game_matcher(game_case_6), game_result)
 
     def test_case_7(self): 
         game_case_7 = create_filled_game(7, 1, {"Mocinha", "Dono da Bola"}, {"Dono da Bola": 1, "Mocinha": 0}, \
-                                  ["Player Dono is not in players set and therefore cannot kill."])
+                                  ["Line 127: Player Dono is not in players set and therefore cannot kill."])
         game_result = RESULT[6]
         self.assertEqual(Game_matcher(game_case_7), game_result)
+
+    def test_case_8(self): 
+        game_case_8 = create_filled_game(8, 2, {"Mocinha", "Dono da Bola"}, {"Dono da Bola": 1, "Mocinha": -1}, \
+                                  ["Line 141: Unable to find killer"])
+        game_result = RESULT[7]
+        self.assertEqual(Game_matcher(game_case_8), game_result)
+
+    def test_case_9(self): 
+        game_case_9 = create_filled_game(9, 1, {"Mocinha", "Dono da Bola"}, {"Dono da Bola": 1, "Mocinha": 0}, \
+                                  ["Line 154: Unable to find killer"])
+        game_result = RESULT[8]
+        self.assertEqual(Game_matcher(game_case_9), game_result)
 
 if __name__ == "__main__":
      unittest.main()
