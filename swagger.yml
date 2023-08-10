@@ -11,13 +11,19 @@ produces:
 basePath: /api
 
 paths:
-  /games:
+  /games/{file_name}:
     get:
       operationId: controller.game_controller.list_all
       tags:
         - Games
       summary: List all games
       description: List all games presented in the log file
+      parameters:
+        - name: file_name
+          in: query
+          type: string
+          description: Name of the log file (file.log)
+          required: true
       responses:
         200:
           description: Successfully list games from log file
@@ -44,7 +50,21 @@ paths:
                       items:
                         type: string    
 
-  /game/{game_number}:
+        404:
+          description: File not found
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+              status:
+                type: integer
+              title:
+                type: string
+              type:
+                type: string
+
+  /game/{file_name}/{game_number}:
     get:
       operationId: controller.game_controller.get_game
       tags:
@@ -52,6 +72,11 @@ paths:
       summary: Get one game from the game list
       description: Get one game, in ocuurence order, from the log file
       parameters:
+        - name: file_name
+          in: query
+          type: string
+          description: Name of the log file (file.log)
+          required: true
         - name: game_number
           in: query
           type: integer
@@ -82,7 +107,7 @@ paths:
                         type: string    
 
         404:
-          description: Game number not found
+          description: Game number not found or File not found 
           schema:
             type: object
             properties:
