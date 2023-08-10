@@ -15,7 +15,7 @@ class List_all_testl(unittest.TestCase):
                             "{\"game_5\": {\"total_kills\": 1, \"players\": [\"Mocinha\", \"Dono da Bola\"], \"kills\": {\"Dono da Bola\": 1, \"Mocinha\": 0}, \"alert_messages\": [\"Line 105: The game did not shut down properly.\"]}}",
                             "{\"game_6\": {\"total_kills\": 2, \"players\": [\"Mocinha\", \"Dono da Bola\"], \"kills\": {\"Dono da Bola\": 1, \"Mocinha\": -1}, \"alert_messages\": [\"Line 114: Player Zeh is not in players set and therefore cannot be killed.\"]}}",
                             "{\"game_7\": {\"total_kills\": 1, \"players\": [\"Mocinha\", \"Dono da Bola\"], \"kills\": {\"Dono da Bola\": 1, \"Mocinha\": 0}, \"alert_messages\": [\"Line 127: Player Dono is not in players set and therefore cannot kill.\"]}}",
-                            "{\"game_8\": {\"total_kills\": 2, \"players\": [\"Mocinha\", \"Dono da Bola\"], \"kills\": {\"Dono da Bola\": 1, \"Mocinha\": -1}, \"alert_messages\": [\"Line 141: Unable to find killer\"]}}",
+                            "{\"game_8\": {\"total_kills\": 2, \"players\": [\"Mocinha\", \"Dono da Bola\"], \"kills\": {\"Dono da Bola\": 1, \"Mocinha\": -1}, \"alert_messages\": [\"Line 141: Unable to find killed\"]}}",
                             "{\"game_9\": {\"total_kills\": 1, \"players\": [\"Mocinha\", \"Dono da Bola\"], \"kills\": {\"Dono da Bola\": 1, \"Mocinha\": 0}, \"alert_messages\": [\"Line 154: Unable to find killer\"]}}"
                           ]
         for i in range(len(result)):

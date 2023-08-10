@@ -1,4 +1,4 @@
-'''Cenário 1: jogo com um jogador, sem mortes'''
+'''Case 1: game with one player and zero kills'''
   0:00 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   15:00 Exit: Timelimit hit.
   20:34 ClientConnect: 2
@@ -7,7 +7,7 @@
   20:37 ClientBegin: 2
   20:37 ShutdownGame:
 
-'''Cenário 2: jogo com mortes causadas apenas pelo mundo'''
+'''Case 2: game with only <world> kills'''
   0:00 ------------------------------------------------------------
   0:00 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
@@ -27,7 +27,7 @@
   1:47 Item: 2 item_armor_shard
   1:47 ShutdownGame:
 
-'''Cenário 3: jogo com mortes causadas apenas por jogadores'''
+'''Case 3: game with only player kills'''
   0:00 ------------------------------------------------------------
   0:00 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
@@ -41,7 +41,7 @@
   1:43 Kill: 3 2 6: Mocinha killed Dono da Bola by MOD_ROCKET
   1:47 ShutdownGame:
 
-'''Cenário 4: jogo com mortes causadas por jogadore e pelo mundo, com entrada de um novo jogador no meio do jogo'''
+'''Case 4: game with <world> and player kills with new plyers in the middle of the game'''
   0:00 ------------------------------------------------------------
   0:00 InitGame: \capturelimit\8\g_maxGameClients\0\timelimit\15\fraglimit\20\dmflags\0\sv_allowDownload\0\sv_maxclients\16\sv_privateClients\2\g_gametype\0\sv_hostname\Code Miner Server\sv_minRate\0\sv_maxRate\10000\sv_minPing\0\sv_maxPing\0\sv_floodProtect\1\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:07 ClientConnect: 2
@@ -91,7 +91,7 @@
   2:02 Kill: 6 4 7: Maluquinho killed Zeh by MOD_ROCKET_SPLASH
   3:32 ShutdownGame:
  
-'''Cenário 5: jogo que inicia e não termina (sem ShutdownGame)'''
+'''Case 5: game with no ShutdownGame''' 
   0:25 ------------------------------------------------------------
   0:25 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
@@ -101,7 +101,7 @@
   0:29 Item: 2 weapon_rocketlauncher
   0:48 Kill: 3 2 6: Dono da Bola killed Mocinha by MOD_ROCKET
 
-'''Cenário 6: jogo em que o mundo mata um jogador invalido'''
+'''Case 6: game with invalid <world> kill - killed exists but is not in the game'''
   0:25 ------------------------------------------------------------
   0:25 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
@@ -115,7 +115,7 @@
   1:32 Kill: 1022 4 22: <world> killed Zeh by MOD_TRIGGER_HURT
   3:32 ShutdownGame:
 
-'''Cenário 7: jogos em que o jogador que mata é invalido'''
+'''Case 7: game with invalid killer - killer exists but is not in the game'''
   0:25 ------------------------------------------------------------
   0:25 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
@@ -128,7 +128,7 @@
   0:48 Kill: 3 2 6: Dono killed Mocinha by MOD_ROCKET
   3:32 ShutdownGame:
 
-'''Cenário 6: jogo em que não é possível determinar o jogador morto pelo mundo'''
+'''Case 8: game with invalid killer - can't get killer'''
   0:25 ------------------------------------------------------------
   0:25 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
@@ -139,10 +139,10 @@
   0:48 Kill: 3 2 6: Dono da Bola killed Mocinha by MOD_ROCKET
   0:35 Item: 2 item_armor_shard
   1:26 Kill: 1022 4 22: <world> killed Mocinha by MOD_TRIGGER_HURT
-  1:32 Kill: 1022 4 22: <world> kill Zeh by MOD_TRIGGER_HURT
+  1:32 Kill: 1022 4 22: <world> killed Zeh with MOD_TRIGGER_HURT
   3:32 ShutdownGame:
 
-  '''Cenário 9: jogos em que não é possível determinar o jogador que mata'''
+'''Case 9: game with invalid<world> kill - can't get killed'''
   0:25 ------------------------------------------------------------
   0:25 InitGame: \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\Code Miner Server\g_gametype\0\sv_privateClients\2\sv_maxclients\16\sv_allowDownload\0\dmflags\0\fraglimit\20\timelimit\15\g_maxGameClients\0\capturelimit\8\version\ioq3 1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0
   0:25 ClientConnect: 2
