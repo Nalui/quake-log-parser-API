@@ -44,3 +44,5 @@ in windows or
 python -m unittest
 ```
 in linux
+
+**unit test cases documentation at cenarios_testes_unitarios.txt**
