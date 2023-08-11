@@ -5,8 +5,8 @@ A RESTful API to parse and consult quake 3 arena log files.
 
 ## Dependencies
 - Python (developed with 3.9.6)
-- Flask
-- connexion
+- flask
+- connexion (with swagger-ui)
 
 ## Running the API
 After installing dependencies, run the app by entering its folder and typing:
