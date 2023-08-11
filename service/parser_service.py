@@ -48,5 +48,6 @@ def parser(log_file):
             elif re.match(Regex.END_GAME.value, row):
                 games.append(game)
                 in_game = False
-
+    if in_game:
+        games.append(game)
     return games
