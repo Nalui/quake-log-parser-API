@@ -1,0 +1,164 @@
+test_list_all:
+
+    def test_list_all_successful:
+    given: o usuário quer fazer uma consulta e insere um nome de arquivo válido
+    when:  a função list_all é acionada
+    then: a função retorna uma lista de jogos que estão de acordo com o arquivo .log
+
+    def test_list_all_unsuccessful:
+    given: o usuário quer fazer uma consulta e insere um nome de arquivo inválido
+    when:  a função list_all é acionada
+    then: a função retorna um erro, com o status code 404, com a mensagem  “File nome_do_arquivo.log not found. Try to use 'games.log' or 'test.log'”
+
+    def test_create_json:
+    given: o retorno dos endpoints deve ser um JSON (ou uma lista de JSONs)
+    when:  quando o usuário faz uma busca a função test_create_json é acionada
+    then: a função retorna o jogo no formato de JSON, com todos os dados condizentes com os dados do jogo.
+
+test_get_game:
+
+    def test_get_game_successful:
+    given: o usuário quer fazer uma consulta e insere um nome de arquivo válido
+    when:  a função get_game é acionada
+    then: a função retorna uma lista de jogos que estão de acordo com o arquivo .log
+
+    def test_get_game_unsuccessful:
+    given: o usuário quer fazer uma consulta e insere um nome de arquivo inválido ou um número de jogo maior do que o número de jogos do arquivo de log
+    when:  a função get_game é acionada
+    then: a função retorna um erro, com o status code 404, com a mensagem  “File nome_do_arquivo.log not found. Try to use 'games.log' or 'test.log'” quando o nome do arquivo é inválido e com a mensagem “Game number 11 not found”  quando o nome do arquivo é válido, mas o número do jogo não
+
+    def test_create_json:
+    given: o retorno dos endpoints deve ser um JSON (ou uma lista de JSONs)
+    when:  quando o usuário faz uma busca a função test_create_json é acionada
+    then: a função retorna o jogo no formato de JSON, com todos os dados condizentes com os dados do jogo.
+
+test_parser_service:
+
+    cenário 1:
+    given:  o arquivo contém um jogo com um jogador e nenhuma morte
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com apenas um jogar (players e kills), com o número de kills (totais e do jogador) e as mensagens de alerta zerados
+
+    cenário 2:
+    given:  o arquivo contém um jogo com dois jogadores e mortes causadas apenas pelo mundo
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com dois jogadores, com o número de kills totais equivalente a quantidade de mortes causadas pelo jogo (3), o número de kills dos jogadores reduzidos (-2 e -1) e as mensagens de alerta zeradas
+
+    cenário 3:
+    given:  o arquivo contém um jogo com dois jogadores mortes causadas apenas pelos jogadores
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com dois jogadores, com o número de kills totais equivalente a quantidade de mortes causadas pelo pelos jogadores (3), o número de kills dos jogadores incrementados (2 e 1) e as mensagens de alerta zeradas
+
+    cenário 4:
+    given:  o arquivo contém um jogo com sete jogadores, mortes causadas pelo mundo e pelos jogadores e jogadores entrando no meio do jogo
+    when: a API lê o arquivo. Os jogadores que entraram no meio da partida devem ser adicionados a lista de jogadores e ao dicionário de kills, e a contabilização de mortes anteriores a entrada do novo jogador deve ser mantida.
+    then: a função parser retorna um jogo com sete jogadores, com o número de kills totais equivalente a quantidade de mortes causadas pelo jogo somadas as mortes causada pelos jogadores (10), o número de kills dos jogadores reduzidos pelas mortes do jogo e incrementados pelos respectivos kills (0, 0, 0, 1, 1, 1, 3) e as mensagens de alerta zeradas. 
+
+    cenário 5:
+    given:  o arquivo contém um jogo que é iniciado mas não é desligado corretamente (sem a linha de ShutdownGame)
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com o número de jogadores e kills equivalente as entradas. Uma mensagem de alerta informando o encerramento inapropriado do jogo é adicionada à lista de alertas, que será exibida posteriormente no retorno da api.
+    cenário 6:
+    given:  o arquivo contém um jogo que possui um jogador inválido (não houve log de entrada do jogador), que é morto pelo mundo em determinado momento
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com o número de jogadores e kills equivalente as entradas. Uma mensagem de alerta informando a presença do jogador inválido é adicionada à lista de alertas, que será exibida posteriormente no retorno da api. A morte do jogador invalido não é contabilizada.
+
+    cenário 7:
+    given:  o arquivo contém um jogo que possui um jogador inválido (não houve log de entrada do jogador), que é mata outro jogador em determinado momento
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com o número de jogadores e kills equivalente as entradas. Uma mensagem de alerta informando a presença do jogador inválido é adicionada à lista de alertas, que será exibida posteriormente no retorno da api. A morte causada pelo jogador invalido não é contabilizada.
+
+    cenário 8:
+    given:  o arquivo contém um jogo que possui um log de kill mal formatado, portanto não é possível determinar que jogador causou a morte.
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com o número de jogadores e kills equivalente as entradas. Uma mensagem de alerta informando a presença do jogador inválido é adicionada à lista de alertas, que será exibida posteriormente no retorno da api. A morte causada pelo jogador invalido não é contabilizada.
+
+    cenário 9:
+    given:  o arquivo contém um jogo que possui um log de kill mal formatado, portanto não é possível determinar que jogador foi morto pelo mundo.
+    when: a API lê o arquivo
+    then: a função parser retorna um jogo com o número de jogadores e kills equivalente as entradas. Uma mensagem de alerta informando a presença do jogador inválido é adicionada à lista de alertas, que será exibida posteriormente no retorno da api. A morte do jogador inválido, causada pelo mundo, não é contabilizada.
+
+test_game_service:
+
+    def test_create_filled_game:
+    given: é necessário criar jogos preenchidos para a implementação de testes
+    when:  a função create_filled_game é acionada
+    then: a função retorna um jogo com os dados preenchidos de acordo com o que foi passado nos parâmetros
+
+    def test_find_game:
+    given: o usuário quer saber os dados de um jogo específico
+    when:  ele faz a busca no endpoint get_game, colocando o número do jogo (considerando que 1 equivale ao primeiro jogo do log, e assim por diante) e a função find_game é acionada
+    then: a função retorna o jogo desejado, com base no nome dele
+
+    def test_create_json:
+    given: o retorno dos endpoints deve ser um JSON (ou uma lista de JSONs)
+    when:  quando o usuário faz uma busca a função test_create_json é acionada
+    then: a função retorna o jogo no formato de JSON, com todos os dados condizentes com os dados do jogo.
+
+test_game_service:
+
+    def test_create_filled_game:
+    given: é necessário criar jogos preenchidos para a implementação de testes
+    when:  a função create_filled_game é acionada
+    then: a função retorna um jogo com os dados preenchidos de acordo com o que foi passado nos parâmetros
+
+    def test_find_game:
+    given: o usuário quer saber os dados de um jogo específico
+    when:  ele faz a busca no endpoint get_game, colocando o número do jogo (considerando que 1 equivale ao primeiro jogo do log, e assim por diante) e a função find_game é acionada
+    then: a função retorna o jogo desejado, com base no nome dele
+
+    def test_create_json:
+    given: o retorno dos endpoints deve ser um JSON (ou uma lista de JSONs)
+    when:  quando o usuário faz uma busca a função test_create_json é acionada
+    then: a função retorna o jogo no formato de JSON, com todos os dados condizentes com os dados do jogo
+
+test_add_world_kill:
+
+    def test_add_first_kill:
+    given: primeira morte do jogo é causada pelo mundo
+    when:  a função add_world_kill é acionada
+    then: a função retorna um jogo com o total de mortes igual a 1 e com o número de mortes do jogador morto pelo mundo igual a -1
+
+    def test_add_new_kill:
+    given: ocorre uma morte causada pelo mundo
+    when:  a função add_world_kill é acionada
+    then: a função retorna um jogo com o total de mortes incrementado em 1 e com o número de mortes do jogador morto pelo mundo reduzido em 1
+
+    def test_add_invalid_player:
+    given: o mundo mata um jogador inválido, que não entrou no jogo
+    when: a função add_world_kill é acionada
+    then: a função retorna o jogo com uma mensagem adicionada a lista de alertas, informando sobre o jogador inválido. Os outros dados do jogo não são alterados
+
+test_add_player_kill:
+
+    def test_add_first_kill:
+    given: primeira morte do jogo é causada por um jogador
+    when:  a função add_player_kill é acionada
+    then: a função retorna um jogo com o total de mortes igual a 1 e com o número de mortes do jogador que matou igual a 1
+
+    def test_add_new_kill:
+    given: ocorre uma morte causada por um jogador
+    when:  a função add_player_kill é acionada
+    then: a função retorna um jogo com o total de mortes e com o número de mortes do jogador que matou incrementados em 1 
+
+    def test_add_invalid_player:
+    given: o um jogador inválido, que não entrou no jogo, mata outro jogador
+    when: a função add_player_kill é acionada
+    then: a função retorna o jogo com uma mensagem adicionada a lista de alertas, informando sobre o jogador inválido. Os outros dados do jogo não são alterados
+
+test_add_player:
+
+    def test_add_first_player:
+    given: o primeiro jogador se conecta no jogo
+    when:  a função add_player é acionada
+    then: a função retorna um jogo com a lista de jogadores e com o dicionário de kills preenchidos apenas com o nome do jogador
+
+    def test_add_new_player:
+    given: um novo jogador se conecta no jogo
+    when:  a função add_player é acionada
+    then: a função retorna um jogo com a lista de jogadores e com o dicionário de kills contendo o novo jogador e os jogadores que entraram anteriormente, sem alterar seus números de kills. 
+
+    def test_add_existing_player:
+    given: um novo jogador entra pela segunda vez no jogo
+    when: a função add_player_kill é acionada
+    then: a função retorna o jogo da forma como estava antes
